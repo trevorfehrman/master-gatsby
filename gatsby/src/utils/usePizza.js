@@ -31,7 +31,6 @@ export default function usePizza({ pizzas, values }) {
   // this is the function that is run when someone submits the form
   async function submitOrder(e) {
     e.preventDefault();
-    console.log(e);
     setLoading(true);
     setError(null);
     // setMessage('Go eat!');
@@ -45,16 +44,13 @@ export default function usePizza({ pizzas, values }) {
       mapleSyrup: values.mapleSyrup,
     };
     // 4. Send this data the a serevrless function when they check out
-    const res = await fetch(
-      `${process.env.GATSBY_SERVERLESS_BASE}/placeOrder`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(body),
-      }
-    );
+    const res = await fetch(`${process.env.GATSBY_SERVERLESS_BASE}/placeOrder`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    });
     // const text = JSON.parse(await res.text());
 
     // check if everything worked

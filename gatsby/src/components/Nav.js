@@ -38,12 +38,37 @@ const NavStyles = styled.nav`
   a {
     font-size: 3rem;
     text-decoration: none;
+    display: block;
     &:hover {
       color: var(--red);
+    }
+    @media (max-width: 800px) {
+      font-size: 2rem;
     }
     /* &[aria-current='page'] {
       color: var(--red);
     } */
+  }
+
+  @media (max-width: 600px) {
+    --columns: 4;
+    ul {
+      grid-template-rows: auto auto;
+      grid-template-columns: repeat(var(--columns), 1fr);
+      justify-items: center;
+    }
+
+    .logo-item {
+      order: 0;
+      grid-column: 1 / -1;
+    }
+
+    .logo {
+      transform: none;
+    }
+  }
+  @media (max-width: 500px) {
+    --columns: 2;
   }
 `;
 
@@ -52,21 +77,21 @@ export default function Nav() {
     <NavStyles>
       <ul>
         <li>
-          <Link to="/">Hot Now</Link>
+          <Link to='/'>Hot Now</Link>
         </li>
         <li>
-          <Link to="/pizzas/">Pizza Menu</Link>
+          <Link to='/pizzas/'>Pizza Menu</Link>
         </li>
-        <li>
-          <Link to="/">
+        <li className='logo-item'>
+          <Link to='/'>
             <Logo />
           </Link>
         </li>
         <li>
-          <Link to="/slicemasters">SliceMasters</Link>
+          <Link to='/slicemasters'>SliceMasters</Link>
         </li>
         <li>
-          <Link to="/order">Order Ahead!</Link>
+          <Link to='/order'>Order Ahead!</Link>
         </li>
       </ul>
     </NavStyles>

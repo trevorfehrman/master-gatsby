@@ -1,11 +1,7 @@
 import path, { resolve } from 'path';
 import fetch from 'isomorphic-fetch';
 
-async function fetchBeersAndTurnIntoNodes({
-  actions,
-  createNodeId,
-  createContentDigest,
-}) {
+async function fetchBeersAndTurnIntoNodes({ actions, createNodeId, createContentDigest }) {
   const res = await fetch('https://sampleapis.com/beers/api/ale');
   const beers = await res.json();
 
@@ -43,7 +39,7 @@ async function turnSlicemastersIntoPages({ graphql, actions }) {
     }
   `);
 
-  data.slicemasters.nodes.forEach((slicemaster) => {
+  data.slicemasters.nodes.forEach(slicemaster => {
     actions.createPage({
       component: resolve('./src/templates/Slicemaster.js'),
       path: `/slicemaster/${slicemaster.slug.current}`,
@@ -58,7 +54,6 @@ async function turnSlicemastersIntoPages({ graphql, actions }) {
   const pageCount = Math.ceil(data.slicemasters.totalCount / pageSize);
 
   Array.from({ length: pageCount }).forEach((_, i) => {
-    console.log(`Creating page ${i}`);
     actions.createPage({
       path: `/slicemasters/${i + 1}`,
       component: path.resolve('./src/pages/slicemasters.js'),
@@ -88,7 +83,7 @@ async function turnPizzasIntoPages({ graphql, actions }) {
     }
   `);
   // 3. Loop over each pizza and create a page for that pizza
-  data.pizzas.nodes.forEach((pizza) => {
+  data.pizzas.nodes.forEach(pizza => {
     actions.createPage({
       // What is the URL for this new page??
       path: `pizza/${pizza.slug.current}`,
@@ -115,7 +110,7 @@ async function turnToppingsIntoPages({ graphql, actions }) {
     }
   `);
   // 3. createPage for that topping
-  data.toppings.nodes.forEach((topping) => {
+  data.toppings.nodes.forEach(topping => {
     actions.createPage({
       path: `topping/${topping.name}`,
       component: toppingTemplate,

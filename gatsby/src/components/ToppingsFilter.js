@@ -17,6 +17,8 @@ const ToppingsStyles = styled.div`
     padding: 5px;
     background: var(--grey);
     border-radius: 2px;
+    text-decoration: none;
+    font-size: clamp(1.5rem, 1.4vw, 2.5rem);
 
     .count {
       background: white;
@@ -30,7 +32,7 @@ const ToppingsStyles = styled.div`
 
 function countPizzasInToppings(pizzas) {
   const counts = pizzas
-    .map((pizza) => pizza.toppings)
+    .map(pizza => pizza.toppings)
     .flat()
     .reduce((acc, topping) => {
       const existingTopping = acc[topping.id];
@@ -46,9 +48,7 @@ function countPizzasInToppings(pizzas) {
       return acc;
     }, {});
 
-  const sortedToppings = Object.values(counts).sort(
-    (a, b) => b.count - a.count
-  );
+  const sortedToppings = Object.values(counts).sort((a, b) => b.count - a.count);
 
   return sortedToppings;
 }
@@ -77,18 +77,18 @@ export default function ToppingsFilter({ activeTopping }) {
 
   return (
     <ToppingsStyles>
-      <Link to="/pizzas">
-        <span className="name">All</span>
-        <span className="count">{pizzas.nodes.length}</span>
+      <Link to='/pizzas'>
+        <span className='name'>All</span>
+        <span className='count'>{pizzas.nodes.length}</span>
       </Link>
-      {toppingsWithCounts.map((topping) => (
+      {toppingsWithCounts.map(topping => (
         <Link
           to={`/topping/${topping.name}`}
           key={topping.id}
           className={topping.name === activeTopping ? 'active' : ''}
         >
-          <span className="name">{topping.name}</span>
-          <span className="count">{topping.count}</span>
+          <span className='name'>{topping.name}</span>
+          <span className='count'>{topping.count}</span>
         </Link>
       ))}
     </ToppingsStyles>
